@@ -14,9 +14,11 @@ public class ToileApp extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("toile.fxml"));
         primaryStage.setResizable(false);
+        //primaryStage.setHeight( 420 );
+        //primaryStage.setWidth(650);
         primaryStage.setScene( new Scene(root) );
+        primaryStage.setTitle("Resultat aux differentes competences du BUT");
         primaryStage.show();
-        // test
     }
 
 }

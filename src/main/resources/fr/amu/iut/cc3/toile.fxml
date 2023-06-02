@@ -8,7 +8,12 @@
 <?import javafx.scene.text.Text?>
 
 
-<HBox id="scene" prefHeight="420.0" prefWidth="650.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<HBox fx:id="scene" prefHeight="420.0" prefWidth="650.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" >
     <Pane prefHeight="400.0" prefWidth="400.0" >
         <Circle centerX="200.0" centerY="200.0" radius="200.0" styleClass="toile"/>
         <Circle centerX="200.0" centerY="200.0" radius="150.0" styleClass="toile"/>
@@ -29,4 +34,25 @@
         <Text x="26" y="99" text="Compétence 6" />
         <Pane fx:id="toile" styleClass="toile"/>
     </Pane>
+    <VBox alignment="CENTER">
+        <GridPane hgap="10" vgap="15" alignment="CENTER">
+            <Label text="Compétence 1 - Realiser" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField  GridPane.columnIndex="1" GridPane.rowIndex="0" maxWidth="50"/>
+            <Label text="Compétence 2 - Optimiser" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <TextField  GridPane.columnIndex="1" GridPane.rowIndex="1" maxWidth="50"/>
+            <Label text="Compétence 3 - Administrer" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField  GridPane.columnIndex="1" GridPane.rowIndex="2" maxWidth="50"/>
+            <Label text="Compétence 4 - Gerer" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+            <TextField  GridPane.columnIndex="1" GridPane.rowIndex="3" maxWidth="50"/>
+            <Label text="Compétence 5 - Conduire" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+            <TextField  GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="50"/>
+            <Label text="Compétence 6 - Collaborer" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+            <TextField  GridPane.columnIndex="1" GridPane.rowIndex="5" maxWidth="50"/>
+        </GridPane>
+        <HBox alignment="CENTER_RIGHT" spacing="20" >
+            <Button fx:id="bTracer" text="Tracer"/>
+            <Button fx:id="bVider" text="Vider"/>
+        </HBox>
+    </VBox>
+
 </HBox>
