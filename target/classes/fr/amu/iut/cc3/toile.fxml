@@ -51,10 +51,14 @@
             <Label text="Compétence 6 - Collaborer" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
             <TextField fx:id="comp6" GridPane.columnIndex="1" GridPane.rowIndex="5" maxWidth="50" onAction="#handleCompAction"/>
         </GridPane>
-        <HBox alignment="CENTER_RIGHT" spacing="20" >
-            <Button fx:id="bTracer" text="Tracer"/>
-            <Button fx:id="bVider" text="Vider"/>
-        </HBox>
+        <VBox>
+            <Label fx:id="msgErreur" style="-fx-text-fill: red"/>
+            <HBox alignment="CENTER_RIGHT" spacing="20" VBox.vgrow="ALWAYS">
+                <Button fx:id="bTracer" text="Tracer"/>
+                <Button fx:id="bVider" text="Vider" onAction="#handleViderAction"/>
+            </HBox>
+        </VBox>
+
     </VBox>
 
 </HBox>
