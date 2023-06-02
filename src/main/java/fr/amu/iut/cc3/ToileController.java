@@ -9,9 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ToileController implements Initializable {
@@ -50,6 +52,8 @@ public class ToileController implements Initializable {
     private Circle c6;
 
     private ArrayList<TextField> listTextfield = new ArrayList<TextField>();
+    private ArrayList<Circle> listPoints = new ArrayList<>();
+    private ArrayList<Line> listLine = new ArrayList<>();
 
 
 
@@ -65,12 +69,37 @@ public class ToileController implements Initializable {
     }
 
     @FXML
+    protected void handleTracerAction(ActionEvent e){
+        if (c1 != null && c2 != null && c3 != null && c4 != null && c5 != null && c6 != null){
+            listPoints.addAll(Arrays.asList(c1,c2, c3, c4, c5, c6)); // Permet de tracer dans le bon ordre meme si les points n'ont pas ete rentres dans cet ordre
+            for (int i = 0; i<listPoints.size()-1; ++i){
+                System.out.println(i + " " + listPoints.get(i) + " " + listPoints.get(i).getCenterX());
+                Line l = new Line(listPoints.get(i).getCenterX(),listPoints.get(i).getCenterY(),listPoints.get(i+1).getCenterX(),listPoints.get(i+1).getCenterY());
+                spider.getChildren().add(l);
+                listLine.add(l);
+            }
+
+            Line l61 = new Line(c6.getCenterX(), c6.getCenterY(), c1.getCenterX(), c1.getCenterY());
+            spider.getChildren().add(l61);
+            listLine.add(l61);
+
+
+       }
+        else {
+            msgErreur.setText("Erreur de trace :\n Manque de points");
+        }
+    }
+    @FXML
     protected void handleViderAction(ActionEvent e){
         spider.getChildren().removeAll(c1, c2, c3, c4, c5, c6);
         msgErreur.setText("");
         for (int i = 0; i<listTextfield.size(); ++i){
             listTextfield.get(i).setText("");
         }
+        for (int i = 0; i<listLine.size(); ++i){
+            spider.getChildren().remove(listLine.get(i));
+        }
+
     }
     @FXML
     protected void handleCompAction(ActionEvent event) {
@@ -126,7 +155,6 @@ public class ToileController implements Initializable {
             } else if (source.getId() == comp6.getId()){
                 x = getXRadarChart(note, 6);
                 y = getYRadarChart(note, 6);
-                // Dessin du cercle
                 spider.getChildren().remove(c6);    // Enlever un point deja present
                 c6 = new Circle( x,y, 5);
                 spider.getChildren().add(c6);
