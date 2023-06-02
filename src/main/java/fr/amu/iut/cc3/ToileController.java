@@ -1,5 +1,10 @@
 package fr.amu.iut.cc3;
 
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.util.StringConverter;
+import javafx.util.converter.DoubleStringConverter;
+import javafx.util.converter.NumberStringConverter;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -57,6 +65,7 @@ public class ToileController implements Initializable {
 
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listTextfield.add(comp1);
@@ -71,9 +80,11 @@ public class ToileController implements Initializable {
     @FXML
     protected void handleTracerAction(ActionEvent e){
         if (c1 != null && c2 != null && c3 != null && c4 != null && c5 != null && c6 != null){
+            for (int i = 0; i<listLine.size(); ++i){
+                spider.getChildren().remove(listLine.get(i));
+            }
             listPoints.addAll(Arrays.asList(c1,c2, c3, c4, c5, c6)); // Permet de tracer dans le bon ordre meme si les points n'ont pas ete rentres dans cet ordre
             for (int i = 0; i<listPoints.size()-1; ++i){
-                System.out.println(i + " " + listPoints.get(i) + " " + listPoints.get(i).getCenterX());
                 Line l = new Line(listPoints.get(i).getCenterX(),listPoints.get(i).getCenterY(),listPoints.get(i+1).getCenterX(),listPoints.get(i+1).getCenterY());
                 spider.getChildren().add(l);
                 listLine.add(l);
@@ -82,8 +93,6 @@ public class ToileController implements Initializable {
             Line l61 = new Line(c6.getCenterX(), c6.getCenterY(), c1.getCenterX(), c1.getCenterY());
             spider.getChildren().add(l61);
             listLine.add(l61);
-
-
        }
         else {
             msgErreur.setText("Erreur de trace :\n Manque de points");
@@ -107,7 +116,6 @@ public class ToileController implements Initializable {
         int note = 0;
         try {
             note = Integer.parseInt(source.getText());
-            System.out.println(note);
         } catch (NumberFormatException e) {
             System.out.println("Probleme de saisie du nombre");
         }
